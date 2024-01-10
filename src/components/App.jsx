@@ -4,17 +4,20 @@ import { Filter } from './Filter/Filter';
 import { useEffect } from 'react';
 import { useState } from 'react';
 import { useRef } from 'react';
+import { useSelector } from 'react-redux';
 
 export const App = () => {
-  const [contacts, setContacts] = useState([]);
+  // const [contacts, setContacts] = useState([]);
   const [filter, setFilter] = useState('');
+  const contacts = useSelector(state => state.contactStore.contacts);
+  console.log(contacts);
 
-  useEffect(() => {
-    const stringafiendContacts = localStorage.getItem('contacts');
+  // useEffect(() => {
+  //   const stringafiendContacts = localStorage.getItem('contacts');
 
-    const parsedContacts = JSON.parse(stringafiendContacts) ?? [];
-    setContacts(parsedContacts);
-  }, []);
+  //   const parsedContacts = JSON.parse(stringafiendContacts) ?? [];
+  //   setContacts(parsedContacts);
+  // }, []);
 
   const firstUpdate = useRef(true);
   useEffect(() => {
@@ -40,7 +43,7 @@ export const App = () => {
       return;
     }
 
-    setContacts(prevState => [...prevState, contactData]);
+    // setContacts(prevState => [...prevState, contactData]);
   };
 
   const filterName = filter => {
@@ -48,7 +51,7 @@ export const App = () => {
   };
 
   const deleteItem = id => {
-    setContacts(contacts.filter(product => product.id !== id));
+    // setContacts(contacts.filter(product => product.id !== id));
   };
 
   const filterApp = () => {
