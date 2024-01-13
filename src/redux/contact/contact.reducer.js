@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
 
-const intitialState = {
+const initialState = {
   contacts: JSON.parse(localStorage.getItem('contacts')) ?? [],
   filter: '',
 };
@@ -9,7 +9,7 @@ const contactsSlice = createSlice({
   // Ім'я слайсу
   name: 'contacts',
   // Початковий стан редюсера слайсу
-  intitialState,
+  initialState,
   // Об'єкт редюсерів
   reducers: {
     addContacts(state, action) {

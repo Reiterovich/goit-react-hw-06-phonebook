@@ -7,26 +7,16 @@ import {
   deleteItems,
   filterContacts,
 } from '../redux/contact/contact.reducer';
-// import { useState } from 'react';
+
 import { useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 export const App = () => {
   const dispatch = useDispatch();
-  // const [contacts, setContacts] = useState([]);
-  // const [filter, setFilter] = useState('');
+
   const filter = useSelector(state => state.contactStore.filter);
-  console.log(filter);
 
   const contacts = useSelector(state => state.contactStore.contacts);
-  console.log(contacts);
-
-  // useEffect(() => {
-  //   const stringafiendContacts = localStorage.getItem('contacts');
-
-  //   const parsedContacts = JSON.parse(stringafiendContacts) ?? [];
-  //   setContacts(parsedContacts);
-  // }, []);
 
   const firstUpdate = useRef(true);
   useEffect(() => {
@@ -52,30 +42,15 @@ export const App = () => {
       return;
     }
 
-    // const addContacts = {
-    //   type: 'contacts/addContact',
-    //   payload: contactData,
-    // };
     dispatch(addContacts(contactData));
-    // setContacts(prevState => [...prevState, contactData]);
   };
 
   const filterName = filter => {
-    // const filterContacts = {
-    //   type: 'filter/contact',
-    //   payload: filter,
-    // };
     dispatch(filterContacts(filter));
-    // setFilter(filter);
   };
 
   const deleteItem = id => {
-    // const deleteContacts = {
-    //   type: 'delete/contact',
-    //   payload: id,
-    // };
     dispatch(deleteItems(id));
-    // setContacts(contacts.filter(product => product.id !== id));
   };
 
   const filterApp = () => {
