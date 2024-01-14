@@ -1,9 +1,14 @@
 import { nanoid } from 'nanoid';
 import { useState } from 'react';
+import { addContacts } from '../../redux/contact/contact.reducer';
+import { useDispatch, useSelector } from 'react-redux';
+import { selectContacts } from '../../redux/contact/selector';
 
-export const Form = ({ conactList }) => {
+export const Form = () => {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
+  const dispatch = useDispatch();
+  const contacts = useSelector(selectContacts);
 
   const hendleSubmit = evt => {
     evt.preventDefault();
@@ -14,7 +19,20 @@ export const Form = ({ conactList }) => {
       id: nanoid(),
     };
 
-    conactList(contactData);
+    if (
+      contacts.some(
+        elm =>
+          elm.name.toLowerCase() === contactData.name.toLowerCase() ||
+          elm.number === contactData.number
+      )
+    ) {
+      window.alert(
+        `${contactData.name} or ${contactData.number} is already in contacts!`
+      );
+      return;
+    }
+
+    dispatch(addContacts(contactData));
 
     setName('');
     setNumber('');

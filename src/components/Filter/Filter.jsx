@@ -1,4 +1,13 @@
-export const Filter = ({ filterName, filter }) => {
+import { useDispatch } from 'react-redux';
+import { filterContacts } from '../../redux/contact/contact.reducer';
+
+export const Filter = () => {
+  const dispatch = useDispatch();
+
+  const filterName = filter => {
+    dispatch(filterContacts(filter));
+  };
+
   const handleInputChange = evt => {
     const value = evt.target.value;
 
@@ -8,12 +17,7 @@ export const Filter = ({ filterName, filter }) => {
   return (
     <>
       <p>Find contacts by neme</p>
-      <input
-        name="filter"
-        value={filter}
-        type="text"
-        onChange={handleInputChange}
-      />
+      <input name="filter" type="text" onChange={handleInputChange} />
     </>
   );
 };
